@@ -1,0 +1,29 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: lite-bi
+  datasource:
+    url: jdbc:postgresql://localhost:5432/lite-bi
+    username: postgres
+    password: 123456
+  jpa:
+    database: postgresql
+    show-sql: true
+    # 推迟初始化数据，在 ddl 之后执行 data.sql
+    defer-datasource-initialization: true
+    hibernate:
+      #      ddl-auto: update
+      ddl-auto: create
+    #      ddl-auto: validate
+
+    properties:
+      # 通过 hibernate.default_schema 解决创建表的外键时，找不到关联表的问题
+      hibernate.default_schema: PUBLIC
+  sql:
+    init:
+      # 总是初始化，默认是内置数据库才初始化
+      mode: always
+logging:
+  level:
+    org.jooq.tools.LoggerListener: DEBUG
